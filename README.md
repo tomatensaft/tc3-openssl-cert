@@ -1,15 +1,38 @@
-# tc3-openssl-cert
+# tc3-openssl-cert :closed_lock_with_key:
 generate openssl certificate for differenet tc3 applications
 
-## generate certificates
-self signed certificate for server and client
+## contents
+* [installation](#installation)
+* [usage](#usage)
+* [tests](#tests)
+* [version](#version)
 
-## the x509 standard
-* the x.509 defines the standard format and coding of certificates and public keys
-* the x.509 contains a public key and a idendity and must be signet (self or authority)
-  
-* DER - distinguished encoding rules
-* PKI - public key infrastructure for SSL/TLS
+## installation
+* install openssl
+* adjust environment settings for and `.env`
+* test configuration with `tc3-openssl-cert.sh --test`
 
-ssldragon info [x509](https://www.ssldragon.com/de/blog/was-ist-x-509-zertifikat/)
+## usage 
+* create rsa certificate
+  - `tc3-openssl-cert.sh --create-rsa`
+* create ecdsa certificate
+  - `tc3-openssl-cert.sh --create-ecdsa`
+* create inspect certificate from configfile
+  - `tc3-openssl-cert.sh --cert_inspect`
+* delete all certificates
+  - `tc3-openssl-cert.sh --delete`
+* list ec curves
+  - `tc3-openssl-cert.sh --list_ec_curves`
+  - 
+## resources
+* debug examples - python tls client [debug](debug/)
+* certicicate configurations - adjustable [conf](conf/)
+* information about certificates [doc](doc/)
+* twincat program [twincat](twincat/)
+
+## tests
+* not testet completly
   
+---
+## version
+*[v0.1.0]*
