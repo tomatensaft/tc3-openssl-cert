@@ -10,19 +10,19 @@ generate openssl certificate for differenet tc3 applications
 ## installation
 * install openssl
 * adjust environment settings for and `.env`
-* test configuration with `tc3-openssl-cert.sh --test`
+* test configuration with `tc3-openssl-cert.sh -test`
 
 ## usage 
 * create rsa certificate
-  - `tc3-openssl-cert.sh --create-rsa`
+  - `tc3-openssl-cert.sh -create-rsa`
 * create ecdsa certificate
-  - `tc3-openssl-cert.sh --create-ecdsa`
+  - `tc3-openssl-cert.sh -create-ecdsa`
 * create inspect certificate from configfile
-  - `tc3-openssl-cert.sh --cert_inspect`
+  - `tc3-openssl-cert.sh -cert_inspect`
 * delete all certificates
-  - `tc3-openssl-cert.sh --delete`
+  - `tc3-openssl-cert.sh -delete`
 * list ec curves
-  - `tc3-openssl-cert.sh --list_ec_curves`
+  - `tc3-openssl-cert.sh -list_ec_curves`
   - 
 ## resources
 * debug examples - python tls client [debug](debug/)
