@@ -2,27 +2,30 @@
 generate openssl certificate for differenet tc3 applications
 
 ## contents
-* [installation](#installation)
-* [usage](#usage)
-* [tests](#tests)
-* [version](#version)
+- [tc3-openssl-cert :closed\_lock\_with\_key:](#tc3-openssl-cert-closed_lock_with_key)
+  - [contents](#contents)
+  - [installation](#installation)
+  - [usage](#usage)
+  - [resources](#resources)
+  - [tests](#tests)
 
 ## installation
 * install openssl
-* adjust environment settings for and `.env`
-* test configuration with `tc3-openssl-cert.sh -test`
+* adjust configuration settings in `/conf` folder
+* it is possible to create different config files for different certificates
+* test configuration with `tc3-openssl-cert.sh --test`
 
 ## usage 
 * create rsa certificate
-  - `tc3-openssl-cert.sh -create-rsa`
+  - `tc3-openssl-cert.sh --create-rsa`
 * create ecdsa certificate
-  - `tc3-openssl-cert.sh -create-ecdsa`
+  - `tc3-openssl-cert.sh --create-ecdsa`
 * create inspect certificate from configfile
-  - `tc3-openssl-cert.sh -cert_inspect`
+  - `tc3-openssl-cert.sh --cert-inspect`
 * delete all certificates
-  - `tc3-openssl-cert.sh -delete`
+  - `tc3-openssl-cert.sh --delete`
 * list ec curves
-  - `tc3-openssl-cert.sh -list_ec_curves`
+  - `tc3-openssl-cert.sh --list-ec-curves`
   - 
 ## resources
 * debug examples - python tls client [debug](debug/)
@@ -34,5 +37,4 @@ generate openssl certificate for differenet tc3 applications
 * not testet completly
   
 ---
-## version
 *[v0.1.0]*

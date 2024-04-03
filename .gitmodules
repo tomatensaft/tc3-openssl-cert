@@ -1,3 +1,4 @@
 [submodule "posix-lib-utils"]
 	path = posix-lib-utils
 	url = https://github.com/tomatensaft/posix-lib-utils
+	branch = main

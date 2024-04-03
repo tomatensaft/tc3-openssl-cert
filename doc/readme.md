@@ -1,7 +1,5 @@
 # info about ssl certificates
 
-
-
 ## generate certificates
 self signed certificate for server and client
 

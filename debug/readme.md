@@ -8,6 +8,6 @@ demo script for tls client
 * [version](#version)
 
 ## installation
-* install python packages for socketio and ssl needed 
+* install python packages for socketio and ssl
 * for tc3 4024 the tls 1.2 version is needed
 * adjust firwall for used ports

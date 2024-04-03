@@ -3,13 +3,14 @@
 
 #set -x
 
-# include external libs from git module
-if [ -f  ./posix-lib-utils/standard_lib.sh ] && \
-   [ -f  ./posix-lib-utils/linux_lib.sh ]; then
-   . ./posix-lib-utils/standard_lib.sh
-   . ./posix-lib-utils/linux_lib.sh
+# set absolute path of root app for global use - relative path from this point
+SCRIPT_ROOT_PATH="./"
+
+# include external libs from git submodule
+if [ -f  ${SCRIPT_ROOT_PATH}/posix-lib-utils/debian_lib.sh ]; then
+   . ${SCRIPT_ROOT_PATH}/posix-lib-utils/debian_lib.sh
 else
-   printf "$0: external libs not found - exit."
+   printf "$0: external libs not found - exit.\n"
    exit 1
 fi
 
@@ -33,7 +34,7 @@ main() {
                test_configuration
                ;;
 
-            --create_rsa)
+            --create-rsa)
                load_config ${config_file}
                log -info "create x509 rsa certificate"
                check_requirements
@@ -41,7 +42,7 @@ main() {
                openssl_x509_rsa
                ;;
 
-            --create_ecdsa)
+            --create-ecdsa)
                load_config ${config_file}
                log -info "create ecdsa certificate"
                check_requirements
@@ -49,14 +50,14 @@ main() {
                openssl_x509_ecdsa
                ;;
 
-            --cert_inspect)
+            --cert-inspect)
                load_config ${config_file}
                log -info "inspect certificate"
                check_requirements
                openssl_incpect
                ;;
 
-            --cert_convert)
+            --cert-convert)
                load_config ${config_file}
                log -info "convert certifcates"
                check_requirements
@@ -69,7 +70,7 @@ main() {
                openssl_remove_data
                ;;
 
-            --list_ec_curves)
+            --list-ec-curves)
                load_config ${config_file}
                log -info "ecdsa list available curves"
                check_requirements
@@ -78,11 +79,11 @@ main() {
 
             --help | --info | *)
                usage   "\-\-test:                              test command" \
-                        "\-\-create_rsa (configfile):          create rsa cert" \
-                        "\-\-create_ecdsa (configfile):        create ecdsa cert" \
-                        "\-\-cert_inspect (configfile):        cert inspect" \
-                        "\-\-cert_convert (cnfigfile):         cert convert" \
-                        "\-\-list_ec_curves:                   list ec curves" \
+                        "\-\-create-rsa (configfile):          create rsa cert" \
+                        "\-\-create-ecdsa (configfile):        create ecdsa cert" \
+                        "\-\-cert-inspect (configfile):        cert inspect" \
+                        "\-\-cert-convert (cnfigfile):         cert convert" \
+                        "\-\-list-ec-curves:                   list ec curves" \
                         "\-\-delete:                           delete cert data" \
                         "\-\-help:                             help"
                   ;;
