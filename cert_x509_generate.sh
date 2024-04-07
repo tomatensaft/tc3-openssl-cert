@@ -4,13 +4,16 @@
 #set -x
 
 # set absolute path of root app for global use - relative path from this point
-SCRIPT_ROOT_PATH="./"
+# ${PWD%/*} -> one folder up / ${PWD%/*/*} -> two folders up 
+SCRIPT_ROOT_PATH="${PWD}/posix-lib-utils"
 
-# include external libs from git submodule
-if [ -f  ${SCRIPT_ROOT_PATH}/posix-lib-utils/debian_lib.sh ]; then
-   . ${SCRIPT_ROOT_PATH}/posix-lib-utils/debian_lib.sh
+echo $SCRIPT_ROOT_PATH
+
+# test include external libs from debian submodule
+if [ -f  ${SCRIPT_ROOT_PATH}/tls_lib.sh ]; then
+   . ${SCRIPT_ROOT_PATH}/tls_lib.sh
 else
-   printf "$0: external libs not found - exit.\n"
+   printf "$0: tls external libs not found - exit.\n"
    exit 1
 fi
 
@@ -102,114 +105,6 @@ check_requirements() {
       cleanup_exit ERR
    fi 
 
-}
-
-# inspect ssl cert
-# $1 certification name
-openssl_incpect() {
-
-   # inspect TCER
-   log -info "inspect certificates"
-   openssl x509 -in $1 -noout -text   
-
-}
-
-# convet certificates
-# $1 input cert
-# $2 output format
-openssl_x509_convert() {
-   log -info "convert certificates"
-}
-
-# create x509 ecdsa cert from parameterfile
-openssl_x509_ecdsa_curves() {
-
-   log -info "ec param list curve"
-   openssl ecparam -list_curves
-
-}
-
-# certificate with elliptic curve from parameterfile
-openssl_x509_ecdsa() {
-
-   # generate the root ca certificate and key
-   log -info "generate root ca key"
-   openssl ecparam -name prime256v1 -genkey -noout -out ${ROOTCA_NAME}.key
-
-   # generate server private key
-   log -info "generate server private key"
-   openssl ecparam -name prime256v1 -genkey -noout -out ${SERVER_CERT_NAME}.key
-
-   # generate server public key
-   log -info "generate public client key"
-   openssl ec -in ${SERVER_CERT_NAME}.key -pubout -out ${CLIENT_CERT_NAME}.key
-
-   # create self sined certificate
-   log -info "generate self signed cerificate request"
-   openssl req -new -x509 -key ${SERVER_CERT_NAME}.key -subj ${SERVER_CERT_ATTRIBUTES} -out ${SERVER_CERT_NAME}.pem -days ${CERT_DURATION}
-
-   # convert pem to pfx
-   log -info "export cert to pfxt"
-   openssl pkcs12 -export -inkey ${SERVER_CERT_NAME}.key -in ${SERVER_CERT_NAME}.pem -out ${SERVER_CERT_NAME}.pfx
-
-   # finished
-   log -info "cert generate finished"
-
-}
-
-
-# certificate rsa - for tls/mqtt/opcua from parameterfile
-openssl_x509_rsa() {
-
-   #ca private key
-   log -info "generate ca private key"
-   openssl genrsa -out ${ROOTCA_NAME}.key 2048
-
-   # generate root ca
-   log -info "generate x.509 root certificate and sign"
-   openssl req -x509 -new -nodes -key ${ROOTCA_NAME}.key -sha256 -subj ${ROOTCA_ATTRIBUTES} -days ${CERT_DURATION} -out ${ROOTCA_NAME}.pem
-
-   # generate server key
-   log -info "generate server private key"
-   openssl genrsa -out ${SERVER_CERT_NAME}.key 2048
-
-   # generate server csr signing request
-   log -info "generate server singning request"
-   openssl req -out ${SERVER_CERT_NAME}.csr -key ${SERVER_CERT_NAME}.key -subj ${SERVER_CERT_ATTRIBUTES} -new
-
-   # sign server certificate
-   log -info "sign server private certificate"
-   openssl x509 -req -in ${SERVER_CERT_NAME}.csr -CA ${ROOTCA_NAME}.pem -CAkey ${ROOTCA_NAME}.key -CAcreateserial -out ${SERVER_CERT_NAME}.crt -days ${CERT_DURATION} -sha256
-
-   # generate client key
-   log -info "generate client key"
-   openssl genrsa -out ${CLIENT_CERT_NAME}.key 2048
-
-   # generate client csr signing request
-   log -info "generate client singning request"
-   openssl req -out ${CLIENT_CERT_NAME}.csr -key ${CLIENT_CERT_NAME}.key -subj ${CLIENT_CERT_ATTRIBUTES} -new
-
-   # sign client certificate
-   log -info "sign client private certificate"
-   openssl x509 -req -in ${CLIENT_CERT_NAME}.csr -CA ${ROOTCA_NAME}.pem -CAkey ${ROOTCA_NAME}.key -CAcreateserial -out ${CLIENT_CERT_NAME}.crt -days ${CERT_DURATION} -sha256
-
-   # finished
-   log -info "cert generate finished"
-
-}
-
-# remove all cert folders
-openssl_remove_data() {
-
-   log -info "remove all cert data"
-   rm -rf ./certdata_*
-}
-
-
-# test configuration
-test_configuration() {
-
-   log -info "test configuration"
 }
 
 # call main function manually - if not need uncomment
