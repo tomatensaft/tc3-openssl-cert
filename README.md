@@ -2,12 +2,11 @@
 generate openssl certificate for differenet tc3 applications
 
 ## contents
-- [tc3-openssl-cert :closed\_lock\_with\_key:](#tc3-openssl-cert-closed_lock_with_key)
-  - [contents](#contents)
-  - [installation](#installation)
-  - [usage](#usage)
-  - [resources](#resources)
-  - [tests](#tests)
+- [contents](#contents)
+- [installation](#installation)
+- [usage](#usage)
+- [resources](#resources)
+- [tests](#tests)
 
 ## installation
 * install openssl
