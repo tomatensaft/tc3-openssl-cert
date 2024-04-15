@@ -4,10 +4,6 @@
 generate openssl certificate for differenet tc3 applications
 
 ## contents
-<<<<<<< HEAD
-=======
-
->>>>>>> 07d0ab0 (update)
 - [contents](#contents)
 - [installation](#installation)
 - [usage](#usage)
