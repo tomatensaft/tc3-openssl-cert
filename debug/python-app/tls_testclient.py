@@ -7,8 +7,8 @@ PORT = 60002
 
 if __name__ == "__main__":
     context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
-    context.load_cert_chain(certfile="../openssl_new/ipc.crt", keyfile="../openssl_new/ipc.key")
-    context.load_verify_locations(cafile="../openssl_new/rootCA.pem")
+    context.load_cert_chain(certfile="/home/tec/certs/public.crt", keyfile="/home/tec/certs/public.key")
+    context.load_verify_locations(cafile="/home/tec/certs/rootCA.pem")
     context.check_hostname = False
     context.verify_mode = ssl.CERT_REQUIRED
     
@@ -22,3 +22,5 @@ if __name__ == "__main__":
     while True:
         client.sendall("Hello World!".encode("utf-8"))
         time.sleep(1)
+        #data = client.recv(256)
+        #print(f"Received {data!r}")

@@ -1,2 +1,3 @@
-## configuration
-adjust configurations for different certicates
+# configuration of openssl / certificate parameters
+
+- adjust configurations for different certicates
